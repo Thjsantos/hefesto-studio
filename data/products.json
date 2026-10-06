@@ -41,10 +41,10 @@
         {
           "name": "1/6",
           "price": 800,
-          "height": "30"
+          "height": "30 cm"
         }
       ],
-      "tag": "New",
+      "tag": "Novo",
       "pronta": false
     }
   ]
