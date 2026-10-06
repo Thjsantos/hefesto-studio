@@ -4,6 +4,8 @@
       "name": "Deku - My Hero Academy",
       "cat": "anime",
       "patreon": "Tanuki Figures",
+      "img": "assets/produtos/deku-1.jpg",
+      "img2": "assets/produtos/deku-2.jpg",
       "desc": "Izuku Midoriya, o Deku de My Hero Academia, em uma pose de avanço sobre uma base de escombros. A peça traz os relâmpagos verdes do One For All envolvendo o herói, o cachecol esvoaçante, o traje com cinto e luvas detalhadas, além de um cenário danificado com um semáforo ao fundo. Escultura em resina com acabamento artesanal, pintada à mão no estúdio.",
       "features": [
         "Todo em resina maciço",
@@ -11,11 +13,39 @@
         "LED no semáforo"
       ],
       "scales": [
-        { "name": "1/6", "price": 1900, "height": "32 cm" },
-        { "name": "1/4", "price": 2500, "height": "48 cm" }
+        {
+          "name": "1/6",
+          "price": 1900,
+          "height": "32 cm"
+        },
+        {
+          "name": "1/4",
+          "price": 2500,
+          "height": "48 cm"
+        }
       ],
-      "img": "assets/produtos/deku-1.jpg",
-      "img2": "assets/produtos/deku-2.jpg"
+      "pronta": false
+    },
+    {
+      "name": "Frieren",
+      "cat": "anime",
+      "patreon": "My Animate",
+      "img": "assets/produtos/frieren1.jpeg",
+      "img2": "assets/produtos/frieren2.jpeg",
+      "desc": "Frieren, a maga elfa de Sousou no Frieren, em uma pose tranquila e elegante, com o cajado apoiado ao lado do corpo. A peça traz os longos cabelos prateados presos em maria-chiquinhas ao vento, as orelhas pontudas, os brincos vermelhos e uma pequena flor azul entre as mãos. O traje branco com detalhes dourados, a capa curta, o cinto, a meia-calça escura e as botas marrons são reproduzidos com riqueza de detalhes, junto ao cajado com a esfera vermelha e a lua crescente dourada. A base reúne muros de pedra, flores coloridas e a maleta de viagem da maga.",
+      "features": [
+        "Todo em resina maciço;",
+        "Com encaixes magnéticos."
+      ],
+      "scales": [
+        {
+          "name": "1/6",
+          "price": 800,
+          "height": "30"
+        }
+      ],
+      "tag": "New",
+      "pronta": false
     }
   ]
 }
