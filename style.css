@@ -84,6 +84,36 @@ section.block{padding:72px 0}
 .card .price{margin-top:auto;font-weight:700;font-size:1.2rem;display:flex;gap:10px;align-items:baseline}
 .card .price s{font-weight:400;font-size:.85rem;opacity:.6}
 .card .btn{text-align:center;margin-top:10px}
+.price .from{font-weight:400;font-size:.8rem;opacity:.7;letter-spacing:.04em}
+
+/* product detail */
+.card .pic{text-decoration:none;color:inherit}
+.crumbs{padding:28px 0 20px;font-family:var(--font-title);font-weight:700;letter-spacing:.08em;font-size:.85rem;text-transform:uppercase}
+.crumbs a{text-decoration:none}.crumbs a:hover{color:var(--bronze)}
+.detail{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+.gallery .main{aspect-ratio:4/5;display:grid;place-items:center;font-size:6rem;border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink);background:var(--ink);overflow:hidden}
+.gallery .main img{width:100%;height:100%;object-fit:cover}
+.thumbs{display:flex;gap:12px;margin-top:22px}
+.thumbs button{width:84px;aspect-ratio:1;padding:0;border:3px solid var(--ink);background:var(--ink);cursor:pointer;opacity:.6;overflow:hidden}
+.thumbs button.on,.thumbs button:hover{opacity:1;box-shadow:3px 3px 0 var(--bronze)}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.summary{display:flex;flex-direction:column;gap:16px}
+.summary small{color:var(--bronze);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.75rem}
+.summary h1{font-size:clamp(1.6rem,3vw,2.3rem)}
+.summary .price{font-weight:700;font-size:1.8rem;display:flex;gap:12px;align-items:baseline}
+.summary .price s{font-weight:400;font-size:1rem;opacity:.6}
+.summary .desc{color:var(--ink-2)}
+.summary ul.desc{padding-left:1.2em}.summary ul.desc li::marker{color:var(--bronze)}
+.specs{border-collapse:collapse;background:var(--parch-3);border:3px solid var(--ink)}
+.specs th,.specs td{padding:10px 14px;text-align:left;border-bottom:2px solid var(--ink);font-size:.95rem}
+.specs tr:last-child th,.specs tr:last-child td{border-bottom:0}
+.specs th{font-family:var(--font-title);letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;width:38%;background:var(--parch-2)}
+.scales{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.scales span{font-family:var(--font-title);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;margin-right:4px}
+.scales button{font-family:var(--font-title);font-weight:700;padding:8px 18px;border:2px solid var(--ink);background:var(--parch-3);color:var(--ink);cursor:pointer;font-size:.95rem}
+.scales button.on,.scales button:hover{background:var(--ink);color:var(--parch-3)}
+.summary .btn{text-align:center;align-self:flex-start}
+.summary .note{font-size:.85rem;color:var(--ink-2)}
 
 /* catalog */
 .page-head{padding:48px 0 8px;text-align:center}
@@ -108,6 +138,7 @@ footer .band{margin-bottom:28px;border-color:var(--bronze);filter:invert(1) sepi
   .hero .wrap{grid-template-columns:1fr;text-align:center}
   .hero p{margin-inline:auto}.hero .cta{justify-content:center}
   .emblem{order:-1;width:min(300px,80%)}
+  .detail{grid-template-columns:1fr}
   .burger{display:block}
   nav{position:absolute;left:0;right:0;top:100%;background:var(--parch-3);border-bottom:3px solid var(--ink);display:none}
   nav.open{display:block}
