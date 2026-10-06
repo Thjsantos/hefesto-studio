@@ -1,0 +1,21 @@
+{
+  "products": [
+    {
+      "name": "Deku - My Hero Academy",
+      "cat": "anime",
+      "patreon": "Tanuki Figures",
+      "desc": "Izuku Midoriya, o Deku de My Hero Academia, em uma pose de avanço sobre uma base de escombros. A peça traz os relâmpagos verdes do One For All envolvendo o herói, o cachecol esvoaçante, o traje com cinto e luvas detalhadas, além de um cenário danificado com um semáforo ao fundo. Escultura em resina com acabamento artesanal, pintada à mão no estúdio.",
+      "features": [
+        "Todo em resina maciço",
+        "Com encaixes magnéticos",
+        "LED no semáforo"
+      ],
+      "scales": [
+        { "name": "1/6", "price": 1900, "height": "32 cm" },
+        { "name": "1/4", "price": 2500, "height": "48 cm" }
+      ],
+      "img": "assets/produtos/deku-1.jpg",
+      "img2": "assets/produtos/deku-2.jpg"
+    }
+  ]
+}

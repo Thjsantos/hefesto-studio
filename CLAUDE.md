@@ -6,8 +6,9 @@ Catalog site for Hefesto Studio, a studio that sells 3D-printed resin figures (a
 - Static site: plain HTML, CSS and JS, no build step.
 - `index.html` – home (hero, "Como comprar", "Peça sob encomenda"). The "Categorias" and "Destaques da forja" sections were removed on purpose ("don't need yet"); the data and CSS for them are still around.
 - `catalogo.html` – catalog with filter buttons and search. Filter buttons only show categories that have products.
-- `produto.html?id=N` – product detail page, opened by clicking a card's image.
-- `products.js` – all data and shared helpers: `WHATSAPP`, `CATEGORIES`, `PRODUCTS`, `brl`, `priceHTML`, `priceText`, `cardHTML`.
+- `produto.html?id=<slug>` – product detail page, opened by clicking a card's image.
+- `data/products.json` – the catalog (`{"products":[...]}`). Edited by the owner through the Pages CMS admin panel (config in `.pages.yml`, photos go to `assets/produtos/`). Each product's id/URL slug is derived from its name.
+- `products.js` – shared logic: `WHATSAPP`, `CATEGORIES`, `productsReady` (promise that loads the JSON into `PRODUCTS`; pages must wait for it), `brl`, `priceHTML`, `priceText`, `cardHTML`. Opening pages via `file://` fails because of the fetch, use a local server.
 - `style.css` – single stylesheet. Greek/forge look: parchment colors, meander bands, Cinzel + Inter fonts.
 - `assets/logo.png`, product photos in `assets/produtos/`.
 
@@ -21,7 +22,7 @@ Catalog site for Hefesto Studio, a studio that sells 3D-printed resin figures (a
 - Optional product fields: `desc` (paragraph), `features` (bullet list), `specs` (extra table rows), `img`/`img2` (second image fades in on card hover), `gallery` (extra detail-page photos), `tag`, `old` (struck-through price).
 
 ## Current catalog
-Only one product so far: **Deku – My Hero Academy** (Anime, model Tanuki Figures), 1/6 32 cm R$ 1.900, 1/4 48 cm R$ 2.500. Features: resin maciça, encaixes magnéticos, LED no semáforo. Heights and prices were given by the owner, replace if they change. More products will be added later.
+Only one product so far (in `data/products.json`): **Deku – My Hero Academy** (Anime, model Tanuki Figures), 1/6 32 cm R$ 1.900, 1/4 48 cm R$ 2.500. Features: resin maciça, encaixes magnéticos, LED no semáforo. Heights and prices were given by the owner, replace if they change. More products will be added later.
 
 ## Hosting and workflow
 - Repo: https://github.com/Thjsantos/hefesto-studio (public). Live site via GitHub Pages from `main`: https://thjsantos.github.io/hefesto-studio/

@@ -9,14 +9,18 @@ const CATEGORIES = {
   pronta: { name: "Pronta Entrega", icon: "📦" },
 };
 
-const PRODUCTS = [
-  { id:1, name:"Deku - My Hero Academy", cat:"anime", patreon:"Tanuki Figures", desc:"Izuku Midoriya, o Deku de My Hero Academia, em uma pose de avanço sobre uma base de escombros. A peça traz os relâmpagos verdes do One For All envolvendo o herói, o cachecol esvoaçante, o traje com cinto e luvas detalhadas, além de um cenário danificado com um semáforo ao fundo. Escultura em resina com acabamento artesanal, pintada à mão no estúdio.",
-  features:["Todo em resina maciço", "Com encaixes magnéticos", "LED no semáforo"],
-  scales:[{ name:"1/6", price:1900, height:"32 cm" }, { name:"1/4", price:2500, height:"48 cm" }], img:"assets/produtos/deku-1.jpg", img2:"assets/produtos/deku-2.jpg" },
-];
-// Products with "scales" show "A partir de" the cheapest one
-PRODUCTS.forEach(p => { if(p.scales){ p.price = Math.min(...p.scales.map(s=>s.price)); p.from = true; } });
-
+// The catalog lives in data/products.json (edited through the Pages CMS admin, see .pages.yml).
+// Pages must wait for productsReady before using PRODUCTS.
+const PRODUCTS = [];
+const slugify = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const productsReady = fetch("data/products.json").then(r => r.json()).then(d => {
+  d.products.forEach(p => {
+    p.id = slugify(p.name);
+    // Products with "scales" show "A partir de" the cheapest one
+    if (p.scales && p.scales.length) { p.price = Math.min(...p.scales.map(s => s.price)); p.from = true; }
+  });
+  PRODUCTS.push(...d.products);
+});
 const brl = n => n.toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
 const priceHTML = p => `${p.from?`<span class="from">A partir de</span>`:""}${brl(p.price)}${p.old?`<s>${brl(p.old)}</s>`:""}`;
 const priceText = p => `${p.from?"a partir de ":""}${brl(p.price)}`;

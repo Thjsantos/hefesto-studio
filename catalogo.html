@@ -45,6 +45,7 @@
 
 <script src="products.js"></script>
 <script>
+productsReady.then(() => {
   let cat = (location.hash || "#todos").slice(1), q = "";
   const filters = document.getElementById("filters");
   const tabs = { todos:"Todos", ...Object.fromEntries(Object.entries(CATEGORIES).filter(([k])=>PRODUCTS.some(p=>p.cat===k || (k==="pronta" && p.pronta))).map(([k,c])=>[k,c.name])) };
@@ -64,6 +65,7 @@
   document.getElementById("wpp-float").href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Olá! Vim pelo catálogo.")}`;
   document.getElementById("y").textContent = new Date().getFullYear();
   render();
+});
 </script>
 </body>
 </html>
