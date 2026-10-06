@@ -13,7 +13,7 @@ const CATEGORIES = {
 // Pages must wait for productsReady before using PRODUCTS.
 const PRODUCTS = [];
 const slugify = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
-const productsReady = fetch("data/products.json").then(r => r.json()).then(d => {
+const productsReady = fetch("data/products.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
   d.products.forEach(p => {
     p.id = slugify(p.name);
     // Products with "scales" show "A partir de" the cheapest one
