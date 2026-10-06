@@ -41,7 +41,8 @@
 
 <script src="products.js"></script>
 <script>
-  const p = PRODUCTS.find(x => x.id === Number(new URLSearchParams(location.search).get("id")));
+productsReady.then(() => {
+  const p = PRODUCTS.find(x => x.id === new URLSearchParams(location.search).get("id"));
   if (!p) document.getElementById("empty").style.display = "block";
   else {
     const c = CATEGORIES[p.cat];
@@ -84,6 +85,7 @@
   }
   document.getElementById("wpp-float").href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Olá! Vim pelo catálogo.")}`;
   document.getElementById("y").textContent = new Date().getFullYear();
+});
 </script>
 </body>
 </html>

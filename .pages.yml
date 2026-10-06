@@ -1,0 +1,47 @@
+# Pages CMS config (https://pagescms.org) – admin panel to manage the catalog.
+media:
+  input: assets/produtos
+  output: assets/produtos
+
+content:
+  - name: products
+    label: Produtos
+    type: file
+    path: data/products.json
+    format: json
+    fields:
+      - name: products
+        label: Produtos
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Nome, type: string, required: true }
+          - name: cat
+            label: Categoria
+            type: select
+            required: true
+            options:
+              values:
+                - { value: anime, label: Anime }
+                - { value: games, label: Games }
+                - { value: cosplay, label: Cosplay }
+                - { value: mitologia, label: Mitologia }
+                - { value: pronta, label: Pronta Entrega }
+          - { name: patreon, label: Modelo (ex. Tanuki Figures), type: string }
+          - { name: img, label: Foto principal, type: image }
+          - { name: img2, label: Foto ao passar o mouse, type: image }
+          - { name: gallery, label: Fotos extras, type: image, list: true }
+          - { name: desc, label: Descrição, type: text }
+          - { name: features, label: Destaques (lista), type: string, list: true }
+          - name: scales
+            label: Escalas (se tiver, o preço sai daqui)
+            type: object
+            list: true
+            fields:
+              - { name: name, label: Escala (ex. 1/6), type: string, required: true }
+              - { name: price, label: Preço (R$), type: number, required: true }
+              - { name: height, label: Altura aproximada (ex. 32 cm), type: string }
+          - { name: price, label: Preço (R$) – só se não tiver escalas, type: number }
+          - { name: old, label: Preço antigo (R$), type: number }
+          - { name: tag, label: Etiqueta (ex. Novo), type: string }
+          - { name: pronta, label: Pronta entrega, type: boolean }
