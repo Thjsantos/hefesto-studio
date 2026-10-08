@@ -90,11 +90,12 @@ section.block{padding:72px 0}
 .card .pic{text-decoration:none;color:inherit}
 .crumbs{padding:28px 0 20px;font-family:var(--font-title);font-weight:700;letter-spacing:.08em;font-size:.85rem;text-transform:uppercase}
 .crumbs a{text-decoration:none}.crumbs a:hover{color:var(--bronze)}
-.detail{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
-.gallery .main{aspect-ratio:4/5;display:grid;place-items:center;font-size:6rem;border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink);background:var(--ink);overflow:hidden}
-.gallery .main img{width:100%;height:100%;object-fit:cover}
-.thumbs{display:flex;gap:12px;margin-top:22px}
-.thumbs button{width:84px;aspect-ratio:1;padding:0;border:3px solid var(--ink);background:var(--ink);cursor:pointer;opacity:.6;overflow:hidden}
+.detail{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:start}
+.detail>*{min-width:0}
+.gallery .main{position:relative;width:100%;aspect-ratio:4/5;display:grid;place-items:center;font-size:6rem;border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink);background:var(--ink);overflow:hidden}
+.gallery .main img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.thumbs{display:flex;gap:12px;margin-top:22px;overflow-x:auto;padding-bottom:8px}
+.thumbs button{flex:0 0 72px;width:72px;aspect-ratio:1;padding:0;border:3px solid var(--ink);background:var(--ink);cursor:pointer;opacity:.6;overflow:hidden}
 .thumbs button.on,.thumbs button:hover{opacity:1;box-shadow:3px 3px 0 var(--bronze)}
 .thumbs img{width:100%;height:100%;object-fit:cover}
 .summary{display:flex;flex-direction:column;gap:16px}
@@ -138,7 +139,7 @@ footer .band{margin-bottom:28px;border-color:var(--bronze);filter:invert(1) sepi
   .hero .wrap{grid-template-columns:1fr;text-align:center}
   .hero p{margin-inline:auto}.hero .cta{justify-content:center}
   .emblem{order:-1;width:min(300px,80%)}
-  .detail{grid-template-columns:1fr}
+  .detail{grid-template-columns:minmax(0,1fr)}
   .burger{display:block}
   nav{position:absolute;left:0;right:0;top:100%;background:var(--parch-3);border-bottom:3px solid var(--ink);display:none}
   nav.open{display:block}
