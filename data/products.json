@@ -76,6 +76,29 @@
         }
       ],
       "pronta": false
+    },
+    {
+      "name": "Tokito - Demon Slayer",
+      "cat": "anime",
+      "patreon": "My Animate",
+      "img": "assets/produtos/tokito1.jpeg",
+      "img2": "assets/produtos/tokito2.1.jpeg",
+      "gallery": [
+        "assets/produtos/tokito3.jpeg",
+        "assets/produtos/tokito4.jpeg"
+      ],
+      "features": [
+        "Modelo em Resina",
+        "Pintado a mão"
+      ],
+      "scales": [
+        {
+          "name": "1/6",
+          "price": 1200,
+          "height": "28 cm"
+        }
+      ],
+      "pronta": false
     }
   ]
 }
