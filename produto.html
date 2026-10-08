@@ -46,7 +46,8 @@ productsReady.then(() => {
   if (!p) document.getElementById("empty").style.display = "block";
   else {
     const c = CATEGORIES[p.cat];
-    const imgs = [p.img, p.img2, ...(p.gallery || [])].filter(Boolean);
+    const MAX_PHOTOS = 6; // keep in sync with the gallery limit in .pages.yml
+    const imgs = [p.img, p.img2, ...(p.gallery || [])].filter(Boolean).slice(0, MAX_PHOTOS);
     const rows = [["Categoria", c.name], ["Modelo", p.patreon], ...Object.entries(p.specs || {})].filter(r => r[1]);
     let sel = 0; // first scale selected by default
     document.title = `${p.name} – Hefesto Studio`;

@@ -30,7 +30,7 @@ content:
           - { name: patreon, label: Modelo (ex. Tanuki Figures), type: string }
           - { name: img, label: Foto principal, type: image }
           - { name: img2, label: Foto ao passar o mouse, type: image }
-          - { name: gallery, label: Fotos extras, type: image, list: true }
+          - { name: gallery, label: "Fotos extras (máx. 4, total de 6 fotos por produto)", type: image, list: { max: 4 } }
           - { name: desc, label: Descrição, type: text }
           - { name: features, label: Destaques (lista), type: string, list: true }
           - name: scales
