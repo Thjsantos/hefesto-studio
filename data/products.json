@@ -45,6 +45,37 @@
       ],
       "tag": "Novo",
       "pronta": false
+    },
+    {
+      "name": "Jin Kazama - Tekken",
+      "cat": "games",
+      "patreon": "Tanuki Figures",
+      "img": "assets/produtos/5147633268105612410.jpg",
+      "img2": "assets/produtos/5147633268105612412.jpg",
+      "gallery": [
+        "assets/produtos/5147633268105612414.jpg",
+        "assets/produtos/5147633268105612415.jpg",
+        "assets/produtos/5147633268105612416.jpg",
+        "assets/produtos/5147633268105612411.jpg"
+      ],
+      "desc": "Jin Kazama protagonista da franquia de jogo de luta Tekken, seu visual estiloso junto com sua calça flamejante em sua pose de luta pronto para desafiar seu proximo oponente.",
+      "features": [
+        "Todo em resina maciço;",
+        "Com encaixes magnéticos."
+      ],
+      "scales": [
+        {
+          "name": "1/6",
+          "price": 1900,
+          "height": "34 cm"
+        },
+        {
+          "name": "1/4",
+          "price": 3100,
+          "height": "50 cm"
+        }
+      ],
+      "pronta": false
     }
   ]
 }
