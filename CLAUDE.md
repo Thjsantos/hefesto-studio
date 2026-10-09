@@ -19,7 +19,7 @@ Catalog site for Hefesto Studio, a studio that sells 3D-printed resin figures (a
 - Each product has a "Modelo" (the Patreon creator whose model is printed), e.g. Tanuki Figures. Show it as "Modelo" on the detail page, not "Criador" and not with the word "Patreon" on cards.
 - Prices depend on scale. A product with `scales:[{name,price,height}]` shows "A partir de <cheapest>" on the card. On the product page the first scale is preselected, and price, "Altura aproximada" and the WhatsApp quote message follow the selected scale.
 - Product detail page "Pedir orçamento" sends a WhatsApp message with the product and scale. Final value, prazo and frete are confirmed with the studio.
-- Optional product fields: `desc` (paragraph), `features` (bullet list), `specs` (extra table rows), `img`/`img2` (second image fades in on card hover), `gallery` (extra detail-page photos), `tag`, `old` (struck-through price).
+- Optional product fields: `desc` (paragraph), `features` (bullet list), `specs` (extra table rows), `img`/`img2` (second image fades in on card hover), `gallery` (extra detail-page photos), `video` (YouTube link, any format: shorts, watch or youtu.be; embedded on the detail page as the last gallery item and counts as 1 of the max 6 media per product, max 4 extra photos in the CMS), `tag`, `old` (struck-through price).
 
 ## Current catalog
 Only one product so far (in `data/products.json`): **Deku – My Hero Academy** (Anime, model Tanuki Figures), 1/6 32 cm R$ 1.900, 1/4 48 cm R$ 2.500. Features: resin maciça, encaixes magnéticos, LED no semáforo. Heights and prices were given by the owner, replace if they change. More products will be added later.

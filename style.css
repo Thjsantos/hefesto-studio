@@ -94,6 +94,9 @@ section.block{padding:72px 0}
 .detail>*{min-width:0}
 .gallery .main{position:relative;width:100%;aspect-ratio:4/5;display:grid;place-items:center;font-size:6rem;border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink);background:var(--ink);overflow:hidden}
 .gallery .main img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.gallery .main iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.thumbs button{position:relative}
+.thumbs .play{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:1.4rem;background:rgba(0,0,0,.35);text-shadow:0 1px 4px #000}
 .thumbs{display:flex;gap:12px;margin-top:22px;overflow-x:auto;padding-bottom:8px}
 .thumbs button{flex:0 0 72px;width:72px;aspect-ratio:1;padding:0;border:3px solid var(--ink);background:var(--ink);cursor:pointer;opacity:.6;overflow:hidden}
 .thumbs button.on,.thumbs button:hover{opacity:1;box-shadow:3px 3px 0 var(--bronze)}
