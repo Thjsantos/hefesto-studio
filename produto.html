@@ -47,15 +47,24 @@ productsReady.then(() => {
   else {
     const c = CATEGORIES[p.cat];
     const MAX_PHOTOS = 6; // keep in sync with the gallery limit in .pages.yml
-    const imgs = [p.img, p.img2, ...(p.gallery || [])].filter(Boolean).slice(0, MAX_PHOTOS);
+    const ytId = u => ((u || "").match(/(?:youtu\.be\/|youtube\.com\/(?:shorts\/|embed\/|watch\?(?:.*&)?v=))([\w-]{11})/) || [])[1];
+    const vid = ytId(p.video);
+    // the video counts as one of the MAX_PHOTOS slots and always comes last
+    const photos = [p.img, p.img2, ...(p.gallery || [])].filter(Boolean).slice(0, MAX_PHOTOS - (vid ? 1 : 0));
+    const items = [...photos.map(src => ({ src })), ...(vid ? [{ video: vid }] : [])];
+    const slide = it => it.video
+      ? `<iframe src="https://www.youtube-nocookie.com/embed/${it.video}?rel=0&playsinline=1" title="Vídeo de ${p.name}" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>`
+      : `<img src="${it.src}" alt="${p.name}">`;
     const rows = [["Categoria", c.name], ["Modelo", p.patreon], ...Object.entries(p.specs || {})].filter(r => r[1]);
     let sel = 0; // first scale selected by default
     document.title = `${p.name} – Hefesto Studio`;
     document.getElementById("product").innerHTML = `
       <div class="detail">
         <div class="gallery">
-          <div class="main">${imgs.length ? `<img id="main-img" src="${imgs[0]}" alt="${p.name}">` : c.icon}</div>
-          ${imgs.length > 1 ? `<div class="thumbs">${imgs.map((s,i) => `<button data-i="${i}" class="${i?"":"on"}" aria-label="Foto ${i+1}"><img src="${s}" alt=""></button>`).join("")}</div>` : ""}
+          <div class="main" id="main">${items.length ? slide(items[0]) : c.icon}</div>
+          ${items.length > 1 ? `<div class="thumbs">${items.map((it,i) => it.video
+            ? `<button data-i="${i}" class="vid" aria-label="Vídeo"><img src="https://i.ytimg.com/vi/${it.video}/hqdefault.jpg" alt=""><span class="play">▶</span></button>`
+            : `<button data-i="${i}" class="${i?"":"on"}" aria-label="Foto ${i+1}"><img src="${it.src}" alt=""></button>`).join("")}</div>` : ""}
         </div>
         <div class="summary">
           <small>${c.name}${p.patreon ? ` · ${p.patreon}` : ""}</small>
@@ -80,7 +89,7 @@ productsReady.then(() => {
     document.querySelectorAll(".scales button").forEach(b => b.onclick = () => { sel = Number(b.dataset.s); update(); });
     update();
     document.querySelectorAll(".thumbs button").forEach(b => b.onclick = () => {
-      document.getElementById("main-img").src = imgs[b.dataset.i];
+      document.getElementById("main").innerHTML = slide(items[b.dataset.i]);
       document.querySelectorAll(".thumbs button").forEach(x => x.classList.toggle("on", x === b));
     });
   }
