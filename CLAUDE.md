@@ -23,10 +23,22 @@ Catalog site for Hefesto Studio, a studio that sells 3D-printed resin figures (a
 - Optional product fields: `desc` (paragraph), `features` (bullet list), `specs` (extra table rows), `img`/`img2` (second image fades in on card hover), `gallery` (extra detail-page photos), `video` (YouTube link, any format: shorts, watch or youtu.be; embedded on the detail page as the last gallery item and counts as 1 of the max 6 media per product, max 4 extra photos in the CMS), `tag`, `old` (struck-through price).
 
 ## Current catalog
-Only one product so far (in `data/products.json`): **Deku – My Hero Academy** (Anime, model Tanuki Figures), 1/6 32 cm R$ 1.900, 1/4 48 cm R$ 2.500. Features: resin maciça, encaixes magnéticos, LED no semáforo. Heights and prices were given by the owner, replace if they change. More products will be added later.
+The catalog lives in `data/products.json` and is edited by the owner in the Pages CMS, so it changes without code changes (5 products at the time of writing: Deku, Frieren, Jin Kazama, Tokito, War). Read the file for names, prices, scales and heights instead of trusting a copy here. Descriptions of figures are written from the product photos and approved by the owner. Known data quirk: "War-  Darksiders" has a double space in its name.
 
+## Related project: automated mobile tests
+- Separate project and repo (planned: `hefesto-studio-tests`) in `C:\Users\tmend\hefesto-studio-tests`: pytest + Appium (Python), run on the owner's Android phone against the live site. It has its own `CLAUDE.md`; work on it in a session opened in that folder.
+- The tests read the live `data/products.json` and `products.js` (`WHATSAPP` constant) and rely on these selectors and ids. **If you rename or remove them, the tests break, so tell the owner and update the tests project too:**
+  - header: `button.burger`, `header nav a`; floating buttons `a.wpp`, `a.ig`
+  - home: `.hero h1`, `.hero .cta a.btn`, `#wpp-main`, `#como-comprar .step`
+  - catalog: `#grid .card` (with `h3`, `small`, `.price`, `a.pic`), `#filters button`, `#q`, `#empty`
+  - product page: `.summary h1`, `.summary small`, `#price`, `.scales button` (class `on` when selected), `#height`, `#quote`, `.thumbs button` (`.vid` for the video), `#main img`, `#main iframe`, `#empty`
+  - behaviors: scale selection updates price, height and the quote message; max 6 media per product; product address `produto.html?id=<slug>`; filters only for categories that have products.
+- When you change site behavior on purpose, add or update the matching test in that project.
 ## Hosting and workflow
 - Repo: https://github.com/Thjsantos/hefesto-studio (public). Live site via GitHub Pages from `main`: https://thjsantos.github.io/hefesto-studio/
 - Don't push directly to `main`. Commit on a branch, push it and open a pull request; the owner merges. (The first feature push went straight to `main` by mistake.)
 - Git and the GitHub CLI are installed and logged in as Thjsantos. If a push can't authenticate, run `gh auth setup-git`.
+- `main` has a ruleset ("Protect main"): no deletion and no force-pushes, for everyone. Pages CMS saves are normal commits straight to `main`, that is expected.
+- Commit with the GitHub no-reply email (`42556262+Thjsantos@users.noreply.github.com`), never the Gmail address. Older commits already contain the Gmail, the owner decided to leave them.
+- Pass PR bodies to `gh pr create` with `--body-file` (a file without BOM), inline quotes break in PowerShell.
 - The owner writes in English and Portuguese. Keep site copy in Portuguese.
