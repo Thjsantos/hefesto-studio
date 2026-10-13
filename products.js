@@ -36,3 +36,17 @@ function cardHTML(p){
       <a class="btn small" href="https://wa.me/${WHATSAPP}?text=${msg}" target="_blank" rel="noopener">Pedir no WhatsApp</a>
     </div></article>`;
 }
+
+// PWA: register the service worker and show an "install app" button when the browser allows it.
+if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+let installEvent;
+addEventListener("beforeinstallprompt", e => {
+  e.preventDefault(); installEvent = e;
+  if (document.getElementById("install-app")) return;
+  const b = document.createElement("button");
+  b.id = "install-app"; b.className = "inst"; b.type = "button"; b.title = "Instalar app"; b.setAttribute("aria-label", "Instalar app");
+  b.innerHTML = `<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M12 7v7m-3-3 3 3 3-3"/></svg>`;
+  b.onclick = async () => { installEvent.prompt(); await installEvent.userChoice; installEvent = null; b.remove(); };
+  document.body.appendChild(b);
+});
+addEventListener("appinstalled", () => { const b = document.getElementById("install-app"); if (b) b.remove(); });
