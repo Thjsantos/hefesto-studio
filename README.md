@@ -16,6 +16,7 @@ The site is in Brazilian Portuguese (pt-BR).
 - **Quote by WhatsApp**: each button opens a chat with a pre-filled message for the product and scale.
 - **Admin panel** to add and edit products without touching code (see below).
 - **Responsive**: tested on phone-sized screens, no horizontal scroll.
+- **Installable app (PWA)**: on Android Chrome an "install" button appears and adds the site to the home screen with its own icon. Pages open offline from a cached copy, and product data is always fetched fresh first.
 
 ## Tech
 
@@ -33,8 +34,9 @@ The site is in Brazilian Portuguese (pt-BR).
 | `products.js` | Shared logic: loads the catalog, prices, product cards, WhatsApp number |
 | `data/products.json` | The catalog data |
 | `style.css` | The single stylesheet |
+| `manifest.webmanifest`, `sw.js` | PWA manifest and service worker (offline cache, installability) |
 | `.pages.yml` | Pages CMS configuration (the admin form) |
-| `assets/` | Logo and product photos (`assets/produtos/`) |
+| `assets/` | Logo, app icons and product photos (`assets/produtos/`) |
 
 ## Product data
 
