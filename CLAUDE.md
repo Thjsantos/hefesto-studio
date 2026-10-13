@@ -11,6 +11,7 @@ Catalog site for Hefesto Studio, a studio that sells 3D-printed resin figures (a
 - `products.js` – shared logic: `WHATSAPP`, `CATEGORIES`, `productsReady` (promise that loads the JSON into `PRODUCTS`; pages must wait for it), `brl`, `priceHTML`, `priceText`, `cardHTML`. Opening pages via `file://` fails because of the fetch, use a local server.
 - `style.css` – single stylesheet. Greek/forge look: parchment colors, meander bands, Cinzel + Inter fonts.
 - `assets/logo.png`, product photos in `assets/produtos/`.
+- PWA (installable app): `manifest.webmanifest`, `sw.js` (service worker: network-first for pages, scripts and data so CMS changes show up right away, offline fallback from cache; photos stale-while-revalidate; bump `CACHE` in `sw.js` when the shell file list changes) and icons `assets/icon-*.png` (made from the logo; the maskable one has padding). `products.js` registers the worker and shows a floating "Instalar app" button (above Instagram) when the browser fires `beforeinstallprompt` (Android Chrome; iPhone has no such event). A Play Store version (TWA) would need the owner to have their own domain, not decided yet.
 
 ## Business decisions
 - WhatsApp: +55 16 99229-3603 (`5516992293603` in `products.js`).
