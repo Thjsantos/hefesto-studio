@@ -33,6 +33,7 @@ The catalog lives in `data/products.json` and is edited by the owner in the Page
   - catalog: `#grid .card` (with `h3`, `small`, `.price`, `a.pic`), `#filters button`, `#q`, `#empty`
   - product page: `.summary h1`, `.summary small`, `#price`, `.scales button` (class `on` when selected), `#height`, `#quote`, `.thumbs button` (`.vid` for the video), `#main img`, `#main iframe`, `#empty`
   - behaviors: scale selection updates price, height and the quote message; max 6 media per product; product address `produto.html?id=<slug>`; filters only for categories that have products.
+- CI: `.github/workflows/e2e-tests.yml` runs on every pull request. It checks out this PR, serves it with `python -m http.server`, checks out `Thjsantos/hefesto-studio-tests` (branch `main`) and runs `pytest --target emulated --headless` with `HEFESTO_URL=http://localhost:8000/`, so a change is tested before it goes live. The HTML report is uploaded as the `e2e-report` artifact. If the check fails because of a deliberate site change, update the tests repo first (or in parallel).
 - When you change site behavior on purpose, add or update the matching test in that project.
 ## Hosting and workflow
 - Repo: https://github.com/Thjsantos/hefesto-studio (public). Live site via GitHub Pages from `main`: https://thjsantos.github.io/hefesto-studio/

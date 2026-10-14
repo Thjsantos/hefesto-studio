@@ -1,0 +1,77 @@
+name: E2E tests
+
+# Runs the automated mobile tests (https://github.com/Thjsantos/hefesto-studio-tests) against the
+# version of the site in this pull request, served locally, so a change is checked before it goes live.
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  e2e:
+    name: pytest (Chrome, Pixel 7 emulation)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the site (this pull request)
+        uses: actions/checkout@v4
+        with:
+          path: site
+
+      - name: Checkout the tests
+        uses: actions/checkout@v4
+        with:
+          repository: Thjsantos/hefesto-studio-tests
+          ref: main
+          path: tests
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: tests/requirements.txt
+
+      - run: pip install -r tests/requirements.txt
+
+      - name: Serve the site locally
+        run: |
+          python -m http.server 8000 --directory site > server.log 2>&1 &
+          for i in $(seq 1 30); do
+            curl -fsS http://localhost:8000/data/products.json > /dev/null && exit 0
+            sleep 1
+          done
+          echo "The local server did not start"; cat server.log; exit 1
+
+      - name: Run tests
+        working-directory: tests
+        env:
+          HEFESTO_URL: http://localhost:8000/
+        run: |
+          set -o pipefail
+          mkdir -p reports
+          pytest --target emulated --headless | tee reports/pytest-output.txt
+
+      - name: Result summary
+        if: always()
+        run: |
+          {
+            echo "## E2E test result"
+            echo
+            echo '```'
+            tail -n 1 tests/reports/pytest-output.txt
+            grep '^FAILED' tests/reports/pytest-output.txt || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-report
+          path: tests/reports/
+          if-no-files-found: ignore
