@@ -1,9 +1,13 @@
 name: E2E tests
 
-# Runs the automated mobile tests (https://github.com/Thjsantos/hefesto-studio-tests) against the
-# version of the site in this pull request, served locally, so a change is checked before it goes live.
+# Runs the automated mobile tests (https://github.com/Thjsantos/hefesto-studio-tests) against the site,
+# served locally from the checked-out code: on pull requests to main (before the merge) and on every
+# push to main (after the merge).
 on:
   pull_request:
+    branches: [main]   # when a pull request to main is opened or updated
+  push:
+    branches: [main]   # after a merge (and after Pages CMS saves)
   workflow_dispatch:
 
 permissions:
@@ -11,7 +15,7 @@ permissions:
 
 concurrency:
   group: e2e-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   e2e:
