@@ -1,0 +1,68 @@
+name: Lighthouse
+
+# Report only: runs Lighthouse (performance, accessibility, best practices, SEO) on the site from this
+# pull request and posts the scores as a comment on the PR. There are no pass/fail limits yet.
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write   # to post and update the comment
+
+concurrency:
+  group: lighthouse-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lighthouse:
+    name: Lighthouse (phone profile)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Serve the site locally
+        run: |
+          python3 -m http.server 8000 > server.log 2>&1 &
+          for i in $(seq 1 30); do
+            curl -fsS http://localhost:8000/data/products.json > /dev/null && exit 0
+            sleep 1
+          done
+          echo "The local server did not start"; cat server.log; exit 1
+
+      - name: Run Lighthouse
+        env:
+          BASE_URL: http://localhost:8000/
+        run: node .github/scripts/lighthouse.mjs
+
+      - name: Upload the HTML reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: reports/
+          if-no-files-found: ignore
+
+      - name: Post the scores on the pull request
+        if: github.event_name == 'pull_request'
+        continue-on-error: true   # e.g. pull requests from forks cannot write comments
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require("fs");
+            const body = fs.readFileSync("reports/lighthouse-summary.md", "utf8");
+            const marker = "<!-- lighthouse-report -->";
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number });
+            const existing = comments.find((c) => c.body && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }
