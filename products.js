@@ -25,7 +25,9 @@ const brl = n => n.toLocaleString("pt-BR", { style:"currency", currency:"BRL" })
 const priceHTML = p => `${p.from?`<span class="from">A partir de</span>`:""}${brl(p.price)}${p.old?`<s>${brl(p.old)}</s>`:""}`;
 // The second photo only shows on hover, so touch screens (no hover) do not need to download it.
 const canHover = matchMedia("(hover: hover)").matches;
-const priceText = p =>`${p.from?"a partir de ":""}${brl(p.price)}`;
+// Heights are stored as a number of centimetres in the CMS (32 -> "32 cm", 27.5 -> "27,5 cm"); older text values are shown as they are.
+const fmtHeight = h => typeof h === "number" ? `${h.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} cm` : (h || "");
+const priceText = p => `${p.from?"a partir de ":""}${brl(p.price)}`;
 
 function cardHTML(p){
   const c = CATEGORIES[p.cat];

@@ -76,7 +76,7 @@ productsReady.then(() => {
           ${p.scales ? `<div class="scales"><span>Escala</span>${p.scales.map((s,i) => `<button data-s="${i}">${s.name}</button>`).join("")}</div>` : ""}
           ${p.desc ? `<p class="desc">${p.desc}</p>` : ""}
           ${p.features ? `<ul class="desc">${p.features.map(d => `<li>${d}</li>`).join("")}</ul>` : ""}
-          <table class="specs">${rows.map(([k,v]) => `<tr><th>${k}</th><td>${v}</td></tr>`).join("")}${p.scales ? `<tr><th>Altura aproximada</th><td id="height"></td></tr>` : ""}</table>
+          <table class="specs">${rows.map(([k,v]) => `<tr><th>${k}</th><td>${v}</td></tr>`).join("")}${p.scales && p.scales.some(s => s.height) ? `<tr><th>Altura aproximada</th><td id="height"></td></tr>` : ""}</table>
           <a class="btn" id="quote" target="_blank" rel="noopener">Pedir orçamento</a>
           <p class="note">O valor varia conforme a escala escolhida. Valor final, prazo e frete são confirmados direto com o estúdio pelo WhatsApp. Envio para todo o Brasil, com embalagem reforçada.</p>
         </div>
@@ -85,7 +85,10 @@ productsReady.then(() => {
       const s = p.scales && p.scales[sel];
       document.getElementById("price").innerHTML = s ? brl(s.price) : priceHTML(p);
       document.querySelectorAll(".scales button").forEach(b => b.classList.toggle("on", Number(b.dataset.s) === sel));
-      if (p.scales) document.getElementById("height").textContent = s ? s.height : p.scales.map(x => `${x.height} (${x.name})`).join(" · ");
+      const heightCell = document.getElementById("height");
+      if (heightCell) heightCell.textContent = s
+        ? (fmtHeight(s.height) || "—")
+        : p.scales.filter(x => x.height).map(x => `${fmtHeight(x.height)} (${x.name})`).join(" · ");
       const what = s ? `${p.name}, escala ${s.name} (${brl(s.price)})` : `${p.name} (${priceText(p)})`;
       document.getElementById("quote").href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Olá! Gostaria de um orçamento para: ${what}.`)}`;
     }

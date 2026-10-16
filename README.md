@@ -49,7 +49,7 @@ Each product in `data/products.json` can have:
 | `img`, `img2`, `gallery` | Main photo, hover photo and up to 4 extra photos |
 | `video` | Optional YouTube link (embedded as the last gallery item) |
 | `desc`, `features` | Description paragraph and bullet list |
-| `scales` | List of `{ name, price, height }`, for example `1/6`, `1900`, `32 cm` |
+| `scales` | List of `{ name, price, height }`, for example `1/6`, `1900`, `32` (height is a number of centimetres, the site shows "32 cm") |
 | `price`, `old`, `tag` | Single price (when there are no scales), previous price and a label such as "Novo" |
 
 A product has at most 6 media items in total (photos plus the video).
