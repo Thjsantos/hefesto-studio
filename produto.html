@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Peça – Hefesto Studio</title>
+<meta name="description" content="Detalhes da peça: fotos, escalas, altura e valor. Peça seu orçamento pelo WhatsApp com o Hefesto Studio.">
 <link rel="icon" href="assets/logo-120.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#16120d">
 <link rel="apple-touch-icon" href="assets/icon-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/cinzel-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -61,6 +62,8 @@ productsReady.then(() => {
     const rows = [["Categoria", c.name], ["Modelo", p.patreon], ...Object.entries(p.specs || {})].filter(r => r[1]);
     let sel = 0; // first scale selected by default
     document.title = `${p.name} – Hefesto Studio`;
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription && p.desc) metaDescription.content = p.desc.replace(/\s+/g, " ").trim().slice(0, 155);
     document.getElementById("product").innerHTML = `
       <div class="detail">
         <div class="gallery">
