@@ -15,7 +15,13 @@ content:
         type: object
         list: true
         fields:
-          - { name: name, label: Nome, type: string, required: true }
+          - name: name
+            label: Nome
+            type: string
+            required: true
+            pattern:
+              regex: '^\S+( \S+)*$'
+              message: "Sem espaços duplicados nem espaço no começo ou no fim."
           - name: cat
             label: Categoria
             type: select
@@ -28,12 +34,23 @@ content:
                 - { value: mitologia, label: Mitologia }
                 - { value: pronta, label: Pronta Entrega }
           - { name: patreon, label: Modelo (ex. Tanuki Figures), type: string }
-          - { name: img, label: Foto principal, type: image }
+          - { name: img, label: Foto principal, type: image, required: true }
           - { name: img2, label: Foto ao passar o mouse, type: image }
           - { name: gallery, label: "Fotos extras (máx. 4, total de 6 fotos por produto)", type: image, list: { max: 4 } }
-          - { name: video, label: "Vídeo (link do YouTube, conta como 1 das 6 mídias)", type: string }
+          - name: video
+            label: "Vídeo (link do YouTube, conta como 1 das 6 mídias)"
+            type: string
+            pattern:
+              regex: '^(https?://(www\.|m\.)?(youtube\.com|youtu\.be)/\S+)?$'
+              message: "Cole um link do YouTube (youtube.com ou youtu.be)."
           - { name: desc, label: Descrição, type: text }
-          - { name: features, label: Destaques (lista), type: string, list: true }
+          - name: features
+            label: Destaques (lista)
+            type: string
+            list: true
+            pattern:
+              regex: '^(.*[^.;,\s])?$'
+              message: "Sem ponto, vírgula ou ponto e vírgula no final."
           - name: scales
             label: Escalas (se tiver, o preço sai daqui)
             type: object
@@ -41,7 +58,12 @@ content:
             fields:
               - { name: name, label: Escala (ex. 1/6), type: string, required: true }
               - { name: price, label: Preço (R$), type: number, required: true }
-              - { name: height, label: Altura aproximada (ex. 32 cm), type: string }
+              - name: height
+                label: Altura aproximada (ex. 32 cm)
+                type: string
+                pattern:
+                  regex: '^(\d+([.,]\d+)? cm)?$'
+                  message: "Use o formato 32 cm (número, espaço e cm)."
           - { name: price, label: Preço (R$) – só se não tiver escalas, type: number }
           - { name: old, label: Preço antigo (R$), type: number }
           - { name: tag, label: Etiqueta (ex. Novo), type: string }

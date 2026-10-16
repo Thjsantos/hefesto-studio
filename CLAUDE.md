@@ -10,7 +10,7 @@ Catalog site for Hefesto Studio, a studio that sells 3D-printed resin figures (a
 - `data/products.json` – the catalog (`{"products":[...]}`). Edited by the owner through the Pages CMS admin panel (config in `.pages.yml`, photos go to `assets/produtos/`). Each product's id/URL slug is derived from its name.
 - `products.js` – shared logic: `WHATSAPP`, `CATEGORIES`, `productsReady` (promise that loads the JSON into `PRODUCTS`; pages must wait for it), `brl`, `priceHTML`, `priceText`, `cardHTML`. Opening pages via `file://` fails because of the fetch, use a local server.
 - `style.css` – single stylesheet. Greek/forge look: parchment colors, meander bands, Cinzel + Inter fonts.
-- `assets/logo.png`, product photos in `assets/produtos/`.
+- Logo files: `assets/logo-120.png` (header, footer and favicon, 13 KB) and `assets/logo.webp` (home hero, 66 KB). The original 513 KB `logo.png` was removed on purpose because it loaded on every page, do not use a large image for the small header logo. Product photos in `assets/produtos/`.
 - PWA (installable app): `manifest.webmanifest`, `sw.js` (service worker: network-first for pages, scripts and data so CMS changes show up right away, offline fallback from cache; photos stale-while-revalidate; bump `CACHE` in `sw.js` when the shell file list changes) and icons `assets/icon-*.png` (made from the logo; the maskable one has padding). `products.js` registers the worker and shows a floating "Instalar app" button (above Instagram) when the browser fires `beforeinstallprompt` (Android Chrome; iPhone has no such event). A Play Store version (TWA) would need the owner to have their own domain, not decided yet.
 
 ## Business decisions
@@ -23,7 +23,7 @@ Catalog site for Hefesto Studio, a studio that sells 3D-printed resin figures (a
 - Optional product fields: `desc` (paragraph), `features` (bullet list), `specs` (extra table rows), `img`/`img2` (second image fades in on card hover), `gallery` (extra detail-page photos), `video` (YouTube link, any format: shorts, watch or youtu.be; embedded on the detail page as the last gallery item and counts as 1 of the max 6 media per product, max 4 extra photos in the CMS), `tag`, `old` (struck-through price).
 
 ## Current catalog
-The catalog lives in `data/products.json` and is edited by the owner in the Pages CMS, so it changes without code changes (5 products at the time of writing: Deku, Frieren, Jin Kazama, Tokito, War). Read the file for names, prices, scales and heights instead of trusting a copy here. Descriptions of figures are written from the product photos and approved by the owner. Known data quirk: "War-  Darksiders" has a double space in its name.
+The catalog lives in `data/products.json` and is edited by the owner in the Pages CMS, so it changes without code changes (5 products at the time of writing: Deku, Frieren, Jin Kazama, Tokito, War). Read the file for names, prices, scales and heights instead of trusting a copy here. Descriptions of figures are written from the product photos and approved by the owner. The CMS form (`.pages.yml`) validates names (no double spaces), heights (`32 cm`), destaques (no trailing punctuation) and YouTube links, and descriptions keep their line breaks (`white-space: pre-line`).
 
 ## Related project: automated mobile tests
 - Separate project and repo (planned: `hefesto-studio-tests`) in `C:\Users\tmend\hefesto-studio-tests`: pytest + Appium (Python), run on the owner's Android phone against the live site. It has its own `CLAUDE.md`; work on it in a session opened in that folder.

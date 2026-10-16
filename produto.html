@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Peça – Hefesto Studio</title>
-<link rel="icon" href="assets/logo.png">
+<link rel="icon" href="assets/logo-120.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#16120d">
 <link rel="apple-touch-icon" href="assets/icon-192.png">
@@ -14,7 +14,7 @@
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <a class="brand" href="index.html"><img src="assets/logo.png" alt="Logo Hefesto Studio">HEFESTO</a>
+  <a class="brand" href="index.html"><img src="assets/logo-120.png" alt="Logo Hefesto Studio">HEFESTO</a>
   <button class="burger" aria-label="Menu" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
   <nav><ul>
     <li><a href="index.html">Início</a></li>
@@ -35,7 +35,7 @@
 <footer>
   <div class="band thin"></div>
   <div class="wrap">
-    <a class="brand" href="index.html"><img src="assets/logo.png" alt="">HEFESTO STUDIO</a>
+    <a class="brand" href="index.html"><img src="assets/logo-120.png" alt="">HEFESTO STUDIO</a>
     <p>© <span id="y"></span> Hefesto Studio · Todos os direitos reservados</p>
   </div>
 </footer>
@@ -57,7 +57,7 @@ productsReady.then(() => {
     const items = [...photos.map(src => ({ src })), ...(vid ? [{ video: vid }] : [])];
     const slide = it => it.video
       ? `<iframe src="https://www.youtube-nocookie.com/embed/${it.video}?rel=0&playsinline=1" title="Vídeo de ${p.name}" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>`
-      : `<img src="${it.src}" alt="${p.name}">`;
+      : `<img src="${it.src}" alt="${p.name}" fetchpriority="high" decoding="async">`;
     const rows = [["Categoria", c.name], ["Modelo", p.patreon], ...Object.entries(p.specs || {})].filter(r => r[1]);
     let sel = 0; // first scale selected by default
     document.title = `${p.name} – Hefesto Studio`;
@@ -66,8 +66,8 @@ productsReady.then(() => {
         <div class="gallery">
           <div class="main" id="main">${items.length ? slide(items[0]) : c.icon}</div>
           ${items.length > 1 ? `<div class="thumbs">${items.map((it,i) => it.video
-            ? `<button data-i="${i}" class="vid" aria-label="Vídeo"><img src="https://i.ytimg.com/vi/${it.video}/hqdefault.jpg" alt=""><span class="play">▶</span></button>`
-            : `<button data-i="${i}" class="${i?"":"on"}" aria-label="Foto ${i+1}"><img src="${it.src}" alt=""></button>`).join("")}</div>` : ""}
+            ? `<button data-i="${i}" class="vid" aria-label="Vídeo"><img src="https://i.ytimg.com/vi/${it.video}/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="play">▶</span></button>`
+            : `<button data-i="${i}" class="${i?"":"on"}" aria-label="Foto ${i+1}"><img src="${it.src}" alt="" loading="lazy" decoding="async"></button>`).join("")}</div>` : ""}
         </div>
         <div class="summary">
           <small>${c.name}${p.patreon ? ` · ${p.patreon}` : ""}</small>
