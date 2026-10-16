@@ -23,13 +23,15 @@ const productsReady = fetch("data/products.json", { cache: "no-cache" }).then(r 
 });
 const brl = n => n.toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
 const priceHTML = p => `${p.from?`<span class="from">A partir de</span>`:""}${brl(p.price)}${p.old?`<s>${brl(p.old)}</s>`:""}`;
-const priceText = p => `${p.from?"a partir de ":""}${brl(p.price)}`;
+// The second photo only shows on hover, so touch screens (no hover) do not need to download it.
+const canHover = matchMedia("(hover: hover)").matches;
+const priceText = p =>`${p.from?"a partir de ":""}${brl(p.price)}`;
 
 function cardHTML(p){
   const c = CATEGORIES[p.cat];
   const msg = encodeURIComponent(`Olá! Tenho interesse no produto: ${p.name} (${priceText(p)}).`);
   return `<article class="card">
-    <a class="pic" href="produto.html?id=${p.id}" aria-label="Ver detalhes de ${p.name}">${p.tag?`<span class="tag">${p.tag}</span>`:""}${p.img?`<img src="${p.img}" alt="${p.name}" loading="lazy">${p.img2?`<img class="hover" src="${p.img2}" alt="${p.name}" loading="lazy">`:""}`:c.icon}</a>
+    <a class="pic" href="produto.html?id=${p.id}" aria-label="Ver detalhes de ${p.name}">${p.tag?`<span class="tag">${p.tag}</span>`:""}${p.img?`<img src="${p.img}" alt="${p.name}" loading="lazy" decoding="async">${p.img2&&canHover?`<img class="hover" src="${p.img2}" alt="" loading="lazy" decoding="async">`:""}`:c.icon}</a>
     <div class="info">
       <small>${c.name}${p.patreon?` · ${p.patreon}`:""}</small><h3>${p.name}</h3>
       <div class="price">${priceHTML(p)}</div>

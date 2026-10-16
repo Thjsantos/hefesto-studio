@@ -107,6 +107,7 @@ section.block{padding:72px 0}
 .summary .price{font-weight:700;font-size:1.8rem;display:flex;gap:12px;align-items:baseline}
 .summary .price s{font-weight:400;font-size:1rem;opacity:.6}
 .summary .desc{color:var(--ink-2)}
+.summary p.desc{white-space:pre-line} /* keep the line breaks typed in the CMS description */
 .summary ul.desc{padding-left:1.2em}.summary ul.desc li::marker{color:var(--bronze)}
 .specs{border-collapse:collapse;background:var(--parch-3);border:3px solid var(--ink)}
 .specs th,.specs td{padding:10px 14px;text-align:left;border-bottom:2px solid var(--ink);font-size:.95rem}
