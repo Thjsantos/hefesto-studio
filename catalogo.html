@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Catálogo – Hefesto Studio</title>
+<meta name="description" content="Catálogo do Hefesto Studio: action figures, bustos e peças em resina, com escalas e valores. Peça seu orçamento pelo WhatsApp.">
 <link rel="icon" href="assets/logo-120.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#16120d">
 <link rel="apple-touch-icon" href="assets/icon-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/cinzel-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -31,6 +32,7 @@
     <div class="title" style="margin:12px 0 0"><div class="rule"></div></div>
   </div>
   <div class="filters" id="filters"></div>
+  <h2 class="sr-only">Peças do catálogo</h2>
   <div class="grid" id="grid"></div>
   <p class="empty" id="empty">Nenhuma peça encontrada. Que tal pedir sob encomenda?</p>
 </main>

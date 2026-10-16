@@ -1,9 +1,10 @@
 // Service worker: makes the site installable and lets it open offline.
 // Pages, scripts and data are fetched from the network first (so CMS changes show up right away)
 // and fall back to the cached copy when offline. Photos are served from cache and refreshed in the background.
-const CACHE = "hefesto-v2";
+const CACHE = "hefesto-v3";
 const SHELL = ["./", "index.html", "catalogo.html", "produto.html", "style.css", "products.js",
-  "manifest.webmanifest", "assets/logo-120.png", "assets/logo.webp", "assets/icon-192.png"];
+  "manifest.webmanifest", "assets/logo-120.png", "assets/logo.webp", "assets/icon-192.png",
+  "assets/fonts/cinzel-latin.woff2", "assets/fonts/inter-latin.woff2"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
