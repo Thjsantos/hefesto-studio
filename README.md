@@ -9,7 +9,7 @@ The site is in Brazilian Portuguese (pt-BR).
 ## Features
 
 - **Home, catalog and product pages** with a Greek/forge visual identity (parchment colors, meander borders, Cinzel + Inter fonts).
-- **Catalog** with category filters (only categories that have products are shown) and text search.
+- **Catalog** with category filters (only categories that have products are shown) and text search. The newest products come first.
 - **Product page** with a photo gallery, an optional YouTube video, a scale selector and a details table. Price, approximate height and the WhatsApp message follow the selected scale.
 - **"A partir de" pricing**: products with several scales show the cheapest price on the card.
 - **Hover image** on catalog cards (a second photo fades in).

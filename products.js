@@ -19,7 +19,9 @@ const productsReady = fetch("data/products.json", { cache: "no-cache" }).then(r 
     // Products with "scales" show "A partir de" the cheapest one
     if (p.scales && p.scales.length) { p.price = Math.min(...p.scales.map(s => s.price)); p.from = true; }
   });
-  PRODUCTS.push(...d.products);
+  // The CMS adds new products at the end of the list, so show them in reverse: newest first.
+  // Dragging a product up or down in the CMS changes its place here too.
+  PRODUCTS.push(...d.products.slice().reverse());
 });
 const brl = n => n.toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
 const priceHTML = p => `${p.from?`<span class="from">A partir de</span>`:""}${brl(p.price)}${p.old?`<s>${brl(p.old)}</s>`:""}`;
