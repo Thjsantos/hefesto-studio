@@ -16,12 +16,12 @@
         {
           "name": "1/6",
           "price": 1900,
-          "height": "32 cm"
+          "height": 32
         },
         {
           "name": "1/4",
           "price": 3000,
-          "height": "48 cm"
+          "height": 48
         }
       ],
       "pronta": false
@@ -41,7 +41,7 @@
         {
           "name": "1/6",
           "price": 1600,
-          "height": "27 cm"
+          "height": 27
         }
       ],
       "tag": "Novo",
@@ -68,12 +68,12 @@
         {
           "name": "1/6",
           "price": 1900,
-          "height": "34 cm"
+          "height": 34
         },
         {
           "name": "1/4",
           "price": 3100,
-          "height": "50 cm"
+          "height": 50
         }
       ],
       "pronta": false
@@ -98,7 +98,7 @@
         {
           "name": "1/6",
           "price": 1400,
-          "height": "28 cm"
+          "height": 28
         }
       ],
       "pronta": false
